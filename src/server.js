@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { consumeTopTracks, getTopTracks } from "./controller/consumer.js";
+import { consumeTopTracks, getTopTracks } from "../src/controller/consumer.js";
 
 const app = express();
 app.use(cors());
@@ -14,9 +14,11 @@ app.use((err, req, res, next) => {
   res.status(500).send("Internal Server Error");
 });
 
-app.listen(3002, () =>
-  console.log("Servidor rodando em http://localhost:3002")
-);
+const port = 3002;
+
+app.listen(port, () => {
+  console.log(`Servidor rodando em http://localhost:${port}`);
+});
 
 (async () => {
   await consumeTopTracks();
