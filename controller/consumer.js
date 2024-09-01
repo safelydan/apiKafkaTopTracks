@@ -23,7 +23,14 @@ export async function consumeTopTracks() {
         try {
           const track = JSON.parse(message.value.toString());
           console.log("Received track:", track);
-          topTracks.push(track);
+
+          // Adiciona a nova faixa ao início da lista
+          topTracks.unshift(track);
+
+          // Mantém apenas as 10 faixas mais recentes
+          if (topTracks.length > 10) {
+            topTracks.pop();
+          }
         } catch (error) {
           console.error("Error parsing message:", error.message);
         }

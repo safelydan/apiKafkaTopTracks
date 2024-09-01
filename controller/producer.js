@@ -25,7 +25,6 @@ async function getSpotifyToken() {
       },
     });
 
-    // Verifique se a resposta foi bem-sucedida
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -48,9 +47,9 @@ async function getTopTracks(artistId, token) {
       }
     );
 
-    return response.data.tracks.slice(0, 10); // Retorna as 10 músicas mais populares
+    return response.data.tracks.slice(0, 10);
   } catch (error) {
-    console.error("Error getting top tracks:", error.message);
+    console.error("Erro ao tentar pegar as tracks:", error.message);
     throw error;
   }
 }
@@ -72,9 +71,9 @@ async function sendTopTracksToKafka(tracks) {
     });
 
     console.log(messages);
-    console.log("Top 10 tracks sent to Kafka");
+    console.log("Top 10 faixas enviadas para o Kafka");
   } catch (error) {
-    console.error("Error sending tracks to Kafka:", error.message);
+    console.error("Erro enviar faixas para o Kafka:", error.message);
     throw error;
   }
 }
@@ -82,16 +81,14 @@ async function sendTopTracksToKafka(tracks) {
 (async () => {
   try {
     await producer.connect();
-
-    // Obtenha o token de acesso do Spotify
     const token = await getSpotifyToken();
 
-    const artistId = "0oSGxfWSnnOXhD2fKuz2Gy"; // Substitua com o ID do artista desejado
+    const artistId = "36QJpDe2go2KgaRleHCDTp"; // Substitua com o ID do artista desejado
     const topTracks = await getTopTracks(artistId, token);
 
     await sendTopTracksToKafka(topTracks);
   } catch (error) {
-    console.error("An error occurred:", error.message);
+    console.error("Um erro aconteceu:", error.message);
   } finally {
     await producer.disconnect();
   }
