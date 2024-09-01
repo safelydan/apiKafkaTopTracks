@@ -83,7 +83,7 @@ async function sendTopTracksToKafka(tracks) {
     await producer.connect();
     const token = await getSpotifyToken();
 
-    const artistId = "36QJpDe2go2KgaRleHCDTp"; // Substitua com o ID do artista desejado
+    const artistId = "4STHEaNw4mPZ2tzheohgXB"; // Substitua com o ID do artista desejado
     const topTracks = await getTopTracks(artistId, token);
 
     await sendTopTracksToKafka(topTracks);
