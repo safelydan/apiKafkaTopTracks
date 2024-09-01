@@ -22,22 +22,19 @@ export async function consumeTopTracks() {
       eachMessage: async ({ message }) => {
         try {
           const track = JSON.parse(message.value.toString());
-          console.log("Received track:", track);
-
-          // Adiciona a nova faixa ao final da lista para manter a ordem correta
+          console.log("Faixa recebida:", track);
           topTracks.push(track);
 
-          // Mantém apenas as 10 faixas mais recentes
           if (topTracks.length > 10) {
             topTracks.shift();
           }
         } catch (error) {
-          console.error("Error parsing message:", error.message);
+          console.error("Erro ao converter mensagem :", error.message);
         }
       },
     });
   } catch (error) {
-    console.error("Error consuming tracks:", error.message);
+    console.error("Erro ao consumir faixas:", error.message);
   }
 }
 
