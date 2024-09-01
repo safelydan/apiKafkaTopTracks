@@ -13,6 +13,6 @@
     "kafka-js": "^0.0.0",
     "kafkajs": "^2.2.4",
     "node-fetch": "^3.3.2",
-    "nodemailer": "^6.9.14",
+    "nodemailer": "^6.9.14"
   }
 }
