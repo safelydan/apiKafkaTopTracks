@@ -4,12 +4,13 @@ const kafka = new Kafka({
   clientId: "spotify-producer",
   brokers: ["localhost:9092"],
 });
+
 const producer = kafka.producer();
 
 export async function connectKafkaProducer() {
   try {
     await producer.connect();
-    console.log("Kafka Producer conectado");
+    console.log("Kafka Producer faixas conectado");
   } catch (error) {
     console.error("Erro ao conectar Kafka Producer:", error.message);
     throw error;
@@ -42,7 +43,7 @@ export async function sendTopTracksToKafka(tracks) {
 export async function disconnectKafkaProducer() {
   try {
     await producer.disconnect();
-    console.log("Kafka Producer disconectado");
+    console.log("Kafka Producer faixas disconectado");
   } catch (error) {
     console.error("Erro ao desconectar Kafka Producer:", error.message);
     throw error;

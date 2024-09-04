@@ -11,12 +11,12 @@ let topTracks = [];
 export async function consumeTopTracks() {
   try {
     await consumer.connect();
-    console.log("Consumer connected");
+    console.log("Track consumer connected");
     await consumer.subscribe({
       topic: "spotify-top-tracks",
       fromBeginning: true,
     });
-    console.log("Subscribed to topic");
+    console.log("Track subscribed to topic");
 
     await consumer.run({
       eachMessage: async ({ message }) => {
